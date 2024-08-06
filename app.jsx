@@ -16,11 +16,12 @@ const startPieces = [
 ]
 
 function createBoard() {
-    startPieces.forEach((startpiece) => {
+    startPieces.forEach((startpiece, i) => {
         const piece = document.createElement('div');
         square.classlist.add('square');
+        square.setAttribute(suare-id, i);
         square.classlist.add('beige');
-        gameBoard.append(square);
+        gameBoard.appendChild(square);
     })
 }
 
