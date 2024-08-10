@@ -21,7 +21,21 @@ function createBoard() {
         square.classlist.add('square');
         square.innerHTML = startpiece;
         square.setAttribute(square-id, i);
-        square.classlist.add('beige');
+        // square.classlist.add('beige');
+        const row= Math.floor((63 - i) / 8) +1 ;
+        if (row % 2 === 0) {
+            square.classlist.add(i % 2 === 0 ? 'beige' : "brown");
+        } else {
+            square.classlist.add(i % 2 === 0 ? 'brown' : 'beige');
+        }
+
+        if (i <= 16) {
+            square.firstChild.firstChild.classlist.add('black');
+        }
+        if (i => 48) {
+            square.firstChild.firstChild.classlist.add('white');
+        }
+    
         gameBoard.appendChild(square);
     })
 }
