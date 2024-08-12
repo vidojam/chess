@@ -120,18 +120,38 @@ function checkIfValid(target) {
             return checkRook(startId, targetId);
         case 'bishop':
             return checkBishop(startId, targetId);
-        case 'knight':
-            return checkKnight(startId, targetId);
+     
         case 'pawn':
             const starterRow = [8,9,10,11,12,13,14,15];
             if (
-                starterRow.includes(startId) && startId + width * 2 === targetId 
-                || (startId + width === targetId) 
-                || (startId + width + 1 === targetId) && document.querySelector([squared-Id]) && document.querySelector(`[square-id = "${startId + width -1}"]`)
+                starterRow.includes(startId) && 
+                startId + width * 2 === targetId ||
+                startId + width === targetId ||
+                startId + width + 1 === targetId && document.querySelector([squared-Id]) && document.querySelector(`[square-id = "${startId + width -1}"]`).firstChild
+
             ) {
                 return true;    
             }
-             
+          break;
+        case 'knight': 
+            if (
+                startId + width * 2 + 1 === targetId ||
+                startId + width * 2 - 1 === targetId ||
+                startId + width - 2 === targetId ||
+                startId + width + 2 === targetId ||
+                startId - width * 2 + 1 === targetId ||
+                startId - width * 2 - 1 === targetId ||
+                startId - width - 2 === targetId ||
+                startId - width + 2 === targetId 
+            ) {
+                return true;
+            }
+            break; 
+        case 'bishop':
+            if (
+                startId + width + 1 === targetId ||
+                startId + width * 2 + 2 && document.querySelector(`[square-id]`)
+            )    
     }
 }
 
