@@ -1,49 +1,50 @@
-const gameBoard = document.getElementById('#game-board');
-const playerDisplay = document.getElementById('#player');
-const infoDisplay = document.getElementById('#info-display');
+const gameBoard = document.getElementById('game-board'); // Removed '#' from the ID
+const playerDisplay = document.getElementById('player');
+const infoDisplay = document.getElementById('info-display'); // Removed '#' from the ID
 const width = 8;
 let playerGo = 'black';
-playerDisplay.textContent = 'black'
+playerDisplay.textContent = 'black';
 
 const startPieces = [
-    rook, knight, bishop, queen, king, bishop, knight, rook,
-    pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
+    'rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook',
+    'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn',
     '', '', '', '', '', '', '', '',
     '', '', '', '', '', '', '', '',
     '', '', '', '', '', '', '', '',
     '', '', '', '', '', '', '', '',
-    pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
-    rook, knight, bishop, queen, king, bishop, knight, rook
-    
-]
+    'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn',
+    'rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'
+];
 
 function createBoard() {
-    startPieces.forEach((startpiece, i) => {
-        const piece = document.createElement('div');
-        square.classlist.add('square');
-        square.innerHTML = startpiece;
-        square.firstChild? setAttribute('draggable', 'true') : '';
-        square.setAttribute(square-id, i);
-        // square.classlist.add('beige');
-        const row= Math.floor((63 - i) / 8) +1 ;
+    startPieces.forEach((startPiece, i) => {
+        const square = document.createElement('div'); // Define square
+        square.classList.add('square'); // Corrected classList
+        square.innerHTML = startPiece;
+        square.setAttribute('draggable', 'true'); // Set draggable attribute
+        square.setAttribute('data-id', i); // Corrected attribute name
+
+        const row = Math.floor(i / width);
         if (row % 2 === 0) {
-            square.classlist.add(i % 2 === 0 ? 'beige' : "brown");
+            square.classList.add(i % 2 === 0 ? 'beige' : 'brown');
         } else {
-            square.classlist.add(i % 2 === 0 ? 'brown' : 'beige');
+            square.classList.add(i % 2 === 0 ? 'brown' : 'beige');
         }
 
-        if (i <= 16) {
-            square.firstChild.firstChild.classlist.add('black');
+        if (startPiece === 'pawn' || startPiece === 'rook' || startPiece === 'knight' || startPiece === 'bishop' || startPiece === 'queen' || startPiece === 'king') {
+            if (i < 16) {
+                square.classList.add('black');
+            } else if (i >= 48) {
+                square.classList.add('white');
+            }
         }
-        if (i => 48) {
-            square.firstChild.firstChild.classlist.add('white');
-        }
-    
+
         gameBoard.appendChild(square);
-    })
+    });
 }
 
 createBoard();
+
 
 const allSquares = document.querySelectorAll('.square');
 
@@ -59,7 +60,7 @@ let startPositionId
 let draggedElement
 
 function dragStart(e) {
-    startPositionId = e.target.parentNode.getAttribute('square-id');
+    startPositionId = e.target.parentNode.getAttribute('data-id');
     draggedElement = e.target;
 }
 
@@ -114,10 +115,6 @@ function checkIfValid(target) {
     console.log(targetId);
 
     switch (piece) {
-        case 'king':
-            return checkKing(startId, targetId);
-        case 'queen':
-            return checkQueen(startId, targetId);
 
      
         case 'pawn':
